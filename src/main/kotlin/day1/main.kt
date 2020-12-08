@@ -1,4 +1,5 @@
-import day1.findAddends
+package day1
+
 import java.io.File
 
 fun main() {
@@ -12,7 +13,7 @@ fun part1(): Int {
 }
 
 private fun readNumbers(): Set<Int> {
-    val numbers = File(ClassLoader.getSystemResource("day1_part1.txt").file)
+    val numbers = File(ClassLoader.getSystemResource("day1/numbers.txt").file)
         .readLines().map(String::toInt).toSet()
     return numbers
 }
