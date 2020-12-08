@@ -1,9 +1,9 @@
 package day2
 
 class Checker {
-    lateinit var rule: MinMaxRule
+    lateinit var rule: Rule
 
-    fun setRule(char: Char, min: Int, max: Int): Checker {
+    fun setMinMaxRule(char: Char, min: Int, max: Int): Checker {
         rule = MinMaxRule(char, min, max)
         return this
     }
@@ -11,12 +11,27 @@ class Checker {
     fun isValid(password: String): Boolean {
         return rule.isValid(password)
     }
+
+    fun setEitherOrRule(char: Char, pos1: Int, pos2: Int): Checker {
+        rule = EitherOrRule(char, pos1, pos2)
+        return this
+    }
 }
 
-data class MinMaxRule(val char: Char, val min: Int, val max: Int) {
-    fun isValid(password: String): Boolean {
+abstract class Rule {
+    abstract fun isValid(password: String): Boolean
+}
+
+data class MinMaxRule(val char: Char, val min: Int, val max: Int) : Rule() {
+    override fun isValid(password: String): Boolean {
         val counts = countLetters(password)
         return counts.getOrDefault(char, 0) in min..max
+    }
+}
+
+data class EitherOrRule(val char: Char, val pos1: Int, val pos2: Int) : Rule() {
+    override fun isValid(password: String): Boolean {
+        return (password[pos1-1] == char) xor (password[pos2-1] == char)
     }
 }
 
