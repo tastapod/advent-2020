@@ -6,21 +6,14 @@ class TreesMap(mapBlock: String) {
     private val height = mapLines.size
 
     fun countTrees(right: Int, down: Int): Int {
-        var x = 0
-        var y = 0
-        var count = 0
-
-        do {
-            x += right
-            y += down
-            if (treeAt(x, y)) {
-                count++
-            }
-        } while (y < height - 1)
-        return count
+        fun countTrees(x: Int, y: Int, count: Int): Int =
+            if (y >= height - 1) count else countTrees(
+                x + right,
+                y + down,
+                count + treeAt(x + right, y + down)
+            )
+        return countTrees(0, 0, 0)
     }
 
-    private fun treeAt(x: Int, y: Int): Boolean {
-        return mapLines[y][x % width] == '#'
-    }
+    private fun treeAt(x: Int, y: Int) = if (mapLines[y][x % width] == '#') 1 else 0
 }
