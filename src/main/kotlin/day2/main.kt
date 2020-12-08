@@ -18,7 +18,5 @@ fun part2(): Int {
 
 private fun countValidPasswords(parse: KFunction1<String, PuzzleLine>) =
     File(ClassLoader.getSystemResource("day2/records.txt").file)
-        .readLines().map(parse).fold(0) { acc: Int, line: PuzzleLine ->
-            acc + if (line.isValid()) 1 else 0
-        }
+        .readLines().map(parse).count(PuzzleLine::isValid)
 
