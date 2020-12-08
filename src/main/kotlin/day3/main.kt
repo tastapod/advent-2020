@@ -3,7 +3,7 @@ package day3
 import java.io.File
 
 fun main() {
-    println(part1())
+    println("${part1()} trees found")
 }
 
 fun part1(): Int {
