@@ -1,7 +1,6 @@
 package day2
 
 import java.io.File
-import kotlin.reflect.KFunction1
 
 fun main() {
     println(part1())
@@ -16,7 +15,9 @@ fun part2(): Int {
     return countValidPasswords(::parseEitherOrPuzzleLine)
 }
 
-private fun countValidPasswords(parse: KFunction1<String, PuzzleLine>) =
+private fun countValidPasswords(parse: (String) -> PuzzleLine) =
     File(ClassLoader.getSystemResource("day2/records.txt").file)
-        .readLines().map(parse).count(PuzzleLine::isValid)
+        .readLines()
+        .map(parse)
+        .count(PuzzleLine::isValid)
 

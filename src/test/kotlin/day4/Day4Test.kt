@@ -1,6 +1,7 @@
 package day4
 
 import org.junit.jupiter.api.Test
+import java.lang.Integer.parseInt
 import kotlin.test.assertEquals
 
 class Day4Test {
@@ -25,5 +26,16 @@ class Day4Test {
         val passports = parsePassportBatch(input)
 
         assertEquals(2, passports.map(::parsePassport).count(::isValidPassport))
+    }
+
+    @Test
+    fun `validates passport using rules`() {
+        // given
+        val checker = PassportChecker().withRule(Rule("byr") {
+            Regex("""^\d{4}$""").matches(it) && parseInt(it) in 1920..2002
+        })
+
+        assertEquals(true, checker.isValid(mapOf("byr" to "2000")))
+        assertEquals(false, checker.isValid(mapOf("byr" to "hello")))
     }
 }

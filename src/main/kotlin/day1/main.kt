@@ -7,18 +7,17 @@ fun main() {
     println(part2())
 }
 
+private val numbers by lazy {
+    File(ClassLoader.getSystemResource("day1/numbers.txt").file)
+        .readLines().map(String::toInt).toSet()
+}
+
 fun part1(): Int {
-    val addends = findAddends(2020, readNumbers(), 2)
+    val addends = findAddends(2020, numbers, 2)
     return addends?.reduce(Math::multiplyExact)!!
 }
 
-private fun readNumbers(): Set<Int> {
-    val numbers = File(ClassLoader.getSystemResource("day1/numbers.txt").file)
-        .readLines().map(String::toInt).toSet()
-    return numbers
-}
-
 fun part2(): Int {
-    val addends = findAddends(2020, readNumbers(), 3)
+    val addends = findAddends(2020, numbers, 3)
     return addends?.reduce(Math::multiplyExact)!!
 }

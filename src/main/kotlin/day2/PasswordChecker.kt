@@ -1,20 +1,18 @@
 package day2
 
-class Checker {
+class PasswordChecker {
     lateinit var rule: Rule
 
-    fun setMinMaxRule(char: Char, min: Int, max: Int): Checker {
+    fun setMinMaxRule(char: Char, min: Int, max: Int) = apply {
         rule = MinMaxRule(char, min, max)
-        return this
     }
 
     fun isValid(password: String): Boolean {
         return rule.isValid(password)
     }
 
-    fun setEitherOrRule(char: Char, pos1: Int, pos2: Int): Checker {
+    fun setEitherOrRule(char: Char, pos1: Int, pos2: Int) = apply {
         rule = EitherOrRule(char, pos1, pos2)
-        return this
     }
 }
 

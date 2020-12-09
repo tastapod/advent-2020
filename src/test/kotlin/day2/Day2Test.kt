@@ -7,7 +7,7 @@ class Day2Test {
     @Test
     fun `checks count of letters in password`() {
         // given
-        val checker = Checker().setMinMaxRule('a', 1, 3)
+        val checker = PasswordChecker().setMinMaxRule('a', 1, 3)
 
         assertEquals(true, checker.isValid("abcde"))
         assertEquals(false, checker.isValid("bbcde"))
@@ -23,7 +23,7 @@ class Day2Test {
     @Test
     fun `checks either-or occurrence in password`() {
         // given
-        val checker = Checker().setEitherOrRule('a', 1, 3)
+        val checker = PasswordChecker().setEitherOrRule('a', 1, 3)
 
         assertEquals(true, checker.isValid("abcde"))
         assertEquals(true, checker.isValid("cbade"))

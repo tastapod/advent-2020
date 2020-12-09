@@ -4,12 +4,11 @@ fun parsePassportBatch(input: String): List<String> =
     Regex("^$", RegexOption.MULTILINE).split(input)
 
 fun parsePassport(passportText: String): Map<String, String> =
-    Regex("""(\w+):(\S+)""").findAll(passportText).fold(mutableMapOf()) {
-        acc: MutableMap<String, String>, result: MatchResult ->
-        val (key, value) = result.destructured
-        acc[key] = value
-        acc
-    }
+    emptyMap<String, String>().plus( // convert sequence of Pairs to Map
+        Regex("""(\w+):(\S+)""").findAll(passportText).map {
+            val (key, value) = it.destructured
+            Pair(key, value)
+        })
 
 val MANDATORY_FIELDS = listOf(
     "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"
