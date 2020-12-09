@@ -3,8 +3,9 @@ package day1
 import java.io.File
 
 fun main() {
-    println(part1())
-    println(part2())
+    println("Day 1")
+    println("Product of 2 addends = ${part1()}")
+    println("Product of 3 addends = ${part2()}")
 }
 
 private val numbers by lazy {

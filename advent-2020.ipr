@@ -15,6 +15,7 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="openjdk-15" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -154,6 +155,17 @@
         <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
       </item>
     </group>
+  </component>
+  <component name="ProjectCodeStyleConfiguration">
+    <option name="USE_PER_PROJECT_SETTINGS" value="true" />
+    <code_scheme name="Project" version="173">
+      <JetCodeStyleSettings>
+        <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
+      </JetCodeStyleSettings>
+      <codeStyleSettings language="kotlin">
+        <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
+      </codeStyleSettings>
+    </code_scheme>
   </component>
   <component name="ProjectDictionaryState">
     <dictionary name="Daniel" />

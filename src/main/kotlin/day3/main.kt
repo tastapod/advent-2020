@@ -3,6 +3,7 @@ package day3
 import java.io.File
 
 fun main() {
+    println("Day 3")
     println("${part1()} trees found")
     println("${part2()} trees product")
 }
@@ -23,8 +24,6 @@ fun part2(): Long {
         Pair(7, 1),
         Pair(1, 2)
     ).fold(1L) { acc: Long, step: Pair<Int, Int> ->
-        val count = treesMap.countTrees(step.first, step.second)
-        println("count = $count")
-        acc * count
+        acc * treesMap.countTrees(step.first, step.second)
     }
 }

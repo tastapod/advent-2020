@@ -3,8 +3,9 @@ package day2
 import java.io.File
 
 fun main() {
-    println(part1())
-    println(part2())
+    println("Day 2")
+    println("${part1()} valid min/max passwords")
+    println("${part2()} valid either/or passwords")
 }
 
 fun part1(): Int {

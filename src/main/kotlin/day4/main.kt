@@ -4,6 +4,7 @@ import java.io.File
 import java.lang.Integer.parseInt
 
 fun main() {
+    println("Day 4")
     println("${part1()} valid passports")
     println("${part2()} validated passports")
 }
@@ -27,8 +28,10 @@ fun part2(): Int {
             Regex("""^\d{4}$""").matches(it) && parseInt(it) in 2020..2030
         })
         .withRule(Rule("hgt") {
-            Regex("""^(\d+)cm$""").matchEntire(it)?.run { parseInt(groupValues[1]) in 150..193 } ?: false ||
-            Regex("""^(\d+)in$""").matchEntire(it)?.run { parseInt(groupValues[1]) in 59..76 } ?: false
+            Regex("""^(\d+)(in|cm)$""").matchEntire(it)?.run {
+                val (height, units) = destructured
+                parseInt(height) in if (units == "cm") 150..193 else 59..76
+            } ?: false
         })
         .withRule(Rule("hcl") {
             Regex("""^#[0-9a-f]{6}$""").matches(it)
