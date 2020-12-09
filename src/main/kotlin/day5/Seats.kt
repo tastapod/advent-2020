@@ -12,3 +12,8 @@ fun parseSeatCode(seatCode: String): Seat {
         parseInt(colCode.replace('L', '0').replace('R', '1'), 2),
     )
 }
+
+fun findMissingSeatId(allSeats: Iterable<Seat>) =
+    allSeats.sortedBy { it.seatId }.zipWithNext().find {
+        it.second.seatId - it.first.seatId == 2
+    }!!.first.seatId + 1

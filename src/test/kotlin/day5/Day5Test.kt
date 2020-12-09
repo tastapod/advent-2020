@@ -11,5 +11,18 @@ class Day5Test {
         assertEquals(Seat(14, 7, 119), parseSeatCode("FFFBBBFRRR"))
         assertEquals(Seat(102, 4, 820), parseSeatCode("BBFFBBFRLL"))
     }
+
+    @Test
+    fun `finds missing seat`() {
+        val seats = listOf(
+            Seat(0, 0, 3),
+            Seat(0, 0, 2),
+            Seat(0, 0, 1),
+            // Seat 4 missing
+            Seat(0, 0, 5),
+            Seat(0, 0, 6),
+        )
+        assertEquals(4, findMissingSeatId(seats))
+    }
 }
 
