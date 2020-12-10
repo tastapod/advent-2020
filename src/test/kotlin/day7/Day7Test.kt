@@ -40,5 +40,21 @@ class Day7Test {
         val bagsByContainer = parseBagRulesByContainer(rulesText)
         assertEquals(4, possibleContainers(bagsByContainer, "shiny gold").size)
     }
+
+    @Test
+    fun `counts contained bags`() {
+        val rulesText = """
+            shiny gold bags contain 2 dark red bags.
+            dark red bags contain 2 dark orange bags.
+            dark orange bags contain 2 dark yellow bags.
+            dark yellow bags contain 2 dark green bags.
+            dark green bags contain 2 dark blue bags.
+            dark blue bags contain 2 dark violet bags.
+            dark violet bags contain no other bags.
+        """.trimIndent()
+
+        val bagsWithContents = parseBagRulesByContents(rulesText)
+        assertEquals(126, countContents(bagsWithContents, "shiny gold"))
+    }
 }
 

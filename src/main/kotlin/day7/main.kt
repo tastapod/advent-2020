@@ -5,6 +5,7 @@ import java.io.File
 fun main() {
     println("Day 7")
     println("${part1()} bags can contain a shiny gold bag")
+    println("${part2()} bags are required in a shiny gold bag")
 }
 
 val rulesText by lazy {
@@ -12,3 +13,5 @@ val rulesText by lazy {
 }
 
 fun part1() = possibleContainers(parseBagRulesByContainer(rulesText),"shiny gold").size
+
+fun part2() = countContents(parseBagRulesByContents(rulesText), "shiny gold")
