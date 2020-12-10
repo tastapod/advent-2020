@@ -1,6 +1,6 @@
 package day2
 
-import java.io.File
+import common.file
 
 fun main() {
     println("Day 2")
@@ -17,7 +17,7 @@ fun part2(): Int {
 }
 
 private fun countValidPasswords(parse: (String) -> PuzzleLine) =
-    File(ClassLoader.getSystemResource("day2/records.txt").file)
+    file("day2/records.txt")
         .readLines()
         .map(parse)
         .count(PuzzleLine::isValid)

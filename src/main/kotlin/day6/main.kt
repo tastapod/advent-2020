@@ -1,6 +1,6 @@
 package day6
 
-import java.io.File
+import common.file
 
 fun main() {
     println("Day 6")
@@ -11,7 +11,7 @@ fun main() {
 fun part2(): Int = sumOfCommonAnswers(answers)
 
 val answers by lazy {
-    File(ClassLoader.getSystemResource("day6/answers.txt").file).readText()
+    file("day6/answers.txt").readText()
 }
 
 fun part1() = sumOfAnswers(answers)

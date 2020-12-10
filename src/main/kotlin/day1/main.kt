@@ -1,6 +1,6 @@
 package day1
 
-import java.io.File
+import common.file
 
 fun main() {
     println("Day 1")
@@ -9,7 +9,7 @@ fun main() {
 }
 
 private val numbers by lazy {
-    File(ClassLoader.getSystemResource("day1/numbers.txt").file)
+    file("day1/numbers.txt")
         .readLines().map(String::toInt).toSet()
 }
 

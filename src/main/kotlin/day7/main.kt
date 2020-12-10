@@ -1,6 +1,6 @@
 package day7
 
-import java.io.File
+import common.file
 
 fun main() {
     println("Day 7")
@@ -9,7 +9,7 @@ fun main() {
 }
 
 val rulesText by lazy {
-    File(ClassLoader.getSystemResource("day7/rules.txt").file).readText()
+    file("day7/rules.txt").readText()
 }
 
 fun part1() = possibleContainers(parseBagRulesByContainer(rulesText),"shiny gold").size

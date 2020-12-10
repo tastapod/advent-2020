@@ -1,6 +1,6 @@
 package day5
 
-import java.io.File
+import common.file
 
 fun main() {
     println("Day 5")
@@ -9,8 +9,7 @@ fun main() {
 }
 
 val seats by lazy {
-    File(ClassLoader.getSystemResource("day5/seats.txt").file)
-        .readLines().map(::parseSeatCode)
+    file("day5/seats.txt").readLines().map(::parseSeatCode)
 }
 
 private fun part1() = seats.reduce { acc, seat ->

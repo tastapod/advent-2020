@@ -1,6 +1,6 @@
 package day3
 
-import java.io.File
+import common.file
 
 fun main() {
     println("Day 3")
@@ -9,7 +9,7 @@ fun main() {
 }
 
 private val treesMap by lazy {
-    TreesMap(File(ClassLoader.getSystemResource("day3/part1.txt").file).readText().trim())
+    TreesMap(file("day3/part1.txt").readText().trim())
 }
 
 fun part1(): Int {

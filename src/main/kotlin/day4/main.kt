@@ -1,6 +1,6 @@
 package day4
 
-import java.io.File
+import common.file
 import java.lang.Integer.parseInt
 
 fun main() {
@@ -10,7 +10,7 @@ fun main() {
 }
 
 private val passports by lazy {
-    val passportData = File(ClassLoader.getSystemResource("day4/part1.txt").file).readText().trim()
+    val passportData = file("day4/part1.txt").readText().trim()
     parsePassportBatch(passportData).map(::parsePassport)
 }
 
