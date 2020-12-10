@@ -4,4 +4,5 @@ fun main() {
     day3.main()
     day4.main()
     day5.main()
+    day6.main()
 }
