@@ -1,6 +1,7 @@
 package day1
 
 import common.file
+import java.lang.Math.multiplyExact
 
 fun main() {
     println("Day 1")
@@ -9,16 +10,9 @@ fun main() {
 }
 
 private val numbers by lazy {
-    file("day1/numbers.txt")
-        .readLines().map(String::toInt).toSet()
+    file("day1/numbers.txt").readLines().map(String::toLong).toSet()
 }
 
-fun part1(): Int {
-    val addends = findAddends(2020, numbers, 2)
-    return addends?.reduce(Math::multiplyExact)!!
-}
+fun part1() = findAddends(2020, numbers, 2).reduce(::multiplyExact)
 
-fun part2(): Int {
-    val addends = findAddends(2020, numbers, 3)
-    return addends?.reduce(Math::multiplyExact)!!
-}
+fun part2() = findAddends(2020, numbers, 3).reduce(::multiplyExact)
