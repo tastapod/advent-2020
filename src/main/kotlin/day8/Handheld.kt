@@ -34,18 +34,12 @@ class Handheld(listing: List<String>) {
     }
 
     fun execute(): ProgramState {
-        var state = ProgramState(0, 0)
-        val visited = mutableSetOf<Int>()
-
-        do {
-            if (state.pc in visited) {
-                return state
+        tailrec fun executeNext(state: ProgramState, visited: Set<Int>): ProgramState =
+            if (state.pc in visited || state.pc >= program.size) {
+                state
             } else {
-                visited.add(state.pc)
-                state = program[state.pc].execute(state)
+                executeNext(program[state.pc].execute(state), visited + state.pc)
             }
-        } while (state.pc < program.size)
-        return state
+        return executeNext(ProgramState(0, 0), emptySet())
     }
-
 }
