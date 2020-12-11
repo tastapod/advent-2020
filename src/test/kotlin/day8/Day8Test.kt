@@ -7,8 +7,7 @@ class Day8Test {
     @Test
     fun `runs a program`() {
         val program = listOf("acc 2")
-
-        assertEquals(2, Handheld(program).execute().acc)
+        assertEquals(ExitState(2, ExitCondition.END_OF_PROGRAM), Handheld(program).execute())
     }
 
     @Test
@@ -24,7 +23,27 @@ class Day8Test {
             jmp -4
             acc +6
         """.trimIndent()
+        assertEquals(ExitState(5, ExitCondition.LOOP_DETECTED), Handheld(program.lines()).execute())
+    }
 
-        assertEquals(5, Handheld(program.lines()).execute().acc)
+    @Test
+    fun `mutates JMP to NOP to resolve loop`() {
+        val program = """
+            acc +1
+            jmp -1 // converts to nop to escape
+        """.trimIndent()
+
+        assertEquals(ExitState(1, ExitCondition.END_OF_PROGRAM), Handheld(program.lines()).mutateUntilExit())
+    }
+
+    @Test
+    fun `mutates NOP to JMP to resolve loop`() {
+        val program = """
+            acc +1
+            nop +2 // converts to jmp to escape
+            jmp -2
+        """.trimIndent()
+
+        assertEquals(ExitState(1, ExitCondition.END_OF_PROGRAM), Handheld(program.lines()).mutateUntilExit())
     }
 }
