@@ -15,7 +15,7 @@ class Day2Test {
 
     @Test
     fun `parses policy and password`() {
-        val actual = parseMinMaxPuzzleLine("1-3 a: abcde")
+        val actual = PuzzleLine.parseMinMaxPuzzleLine("1-3 a: abcde")
         assertEquals("abcde", actual.password)
         assertEquals(MinMaxRule('a', 1, 3), actual.checker.rule)
     }

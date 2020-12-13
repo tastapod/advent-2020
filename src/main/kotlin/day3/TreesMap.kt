@@ -6,7 +6,7 @@ class TreesMap(mapBlock: String) {
     private val height = mapLines.size
 
     fun countTrees(right: Int, down: Int): Int {
-        fun countTrees(x: Int, y: Int, count: Int): Int =
+        tailrec fun countTrees(x: Int, y: Int, count: Int): Int =
             if (y >= height - 1) count else countTrees(
                 x + right,
                 y + down,

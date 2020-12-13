@@ -9,11 +9,11 @@ fun main() {
 }
 
 fun part1(): Int {
-    return countValidPasswords(::parseMinMaxPuzzleLine)
+    return countValidPasswords(PuzzleLine::parseMinMaxPuzzleLine)
 }
 
 fun part2(): Int {
-    return countValidPasswords(::parseEitherOrPuzzleLine)
+    return countValidPasswords(PuzzleLine::parseEitherOrPuzzleLine)
 }
 
 private fun countValidPasswords(parse: (String) -> PuzzleLine) =
