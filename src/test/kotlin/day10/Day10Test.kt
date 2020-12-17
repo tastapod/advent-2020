@@ -1,6 +1,7 @@
 package day10
 
 import org.junit.jupiter.api.Test
+import java.lang.Integer.parseInt
 import kotlin.test.assertEquals
 
 class Day10Test {
@@ -16,7 +17,7 @@ class Day10Test {
             6
             12
             4
-        """.trimIndent().lines().map(String::toLong)
+        """.trimIndent().lines().map(::parseInt)
 
     private val longerInput = """
             28
@@ -50,16 +51,16 @@ class Day10Test {
             34
             10
             3
-        """.trimIndent().lines().map(String::toLong)
+        """.trimIndent().lines().map(::parseInt)
 
     @Test
     fun `finds deltas in a valid chain of adapters`() {
-        assertEquals(mapOf(1L to 7, 3L to 5), countJoltageDeltas(adapterList(shortInput)))
+        assertEquals(mapOf(1 to 7, 3 to 5), countJoltageDeltas(adapterList(shortInput)))
     }
 
     @Test
     fun `finds deltas in a longer valid chain of adapters`() {
-        assertEquals(mapOf(1L to 22, 3L to 10), countJoltageDeltas(adapterList(longerInput)))
+        assertEquals(mapOf(1 to 22, 3 to 10), countJoltageDeltas(adapterList(longerInput)))
     }
 
     @Test
@@ -69,23 +70,23 @@ class Day10Test {
     }
 
     @Test
-    fun `finds all valid connections in short valid chain`() {
+    fun `finds all valid backlinks in short valid chain`() {
         assertEquals(
-            mapOf<Long, List<Long>>(
-                22L to listOf(19),
-                19L to listOf(16),
-                16L to listOf(15),
-                15L to listOf(12),
-                12L to listOf(11, 10),
-                11L to listOf(10),
-                10L to listOf(7),
-                7L to listOf(6, 5, 4),
-                6L to listOf(5, 4),
-                5L to listOf(4),
-                4L to listOf(1),
-                1L to listOf(0),
+            mapOf(
+                22 to listOf(19),
+                19 to listOf(16),
+                16 to listOf(15),
+                15 to listOf(12),
+                12 to listOf(11, 10),
+                11 to listOf(10),
+                10 to listOf(7),
+                7 to listOf(6, 5, 4),
+                6 to listOf(5, 4),
+                5 to listOf(4),
+                4 to listOf(1),
+                1 to listOf(0),
             ),
-            findConnections(adapterList(shortInput), 3)
+            findBackLinks(adapterList(shortInput), 3)
         )
     }
 

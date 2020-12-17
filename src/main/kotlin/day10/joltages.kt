@@ -1,12 +1,12 @@
 package day10
 
-fun adapterList(adapters: List<Long>) = adapters + 0L + (adapters.maxOrNull()!! + 3L)
-fun adapterList(vararg adapters: Long) = adapterList(adapters.asList())
+fun adapterList(adapters: List<Int>) = adapters + 0 + (adapters.maxOrNull()!! + 3)
+fun adapterList(vararg adapters: Int) = adapterList(adapters.asList())
 
 fun <T> without(list: List<T>, pos: Int): List<T> =
     list.slice(0 until pos) + list.slice(pos + 1 until list.size)
 
-fun countJoltageDeltas(input: List<Long>): Map<Long, Int> {
+fun countJoltageDeltas(input: List<Int>): Map<Int, Int> {
     return input.sorted().zipWithNext().fold(emptyMap()) { acc, it ->
         val delta = it.second - it.first
         require(delta < 4) { "Too much difference between ${it.first} and ${it.second}" }
@@ -14,31 +14,46 @@ fun countJoltageDeltas(input: List<Long>): Map<Long, Int> {
     }
 }
 
-fun findConnections(input: List<Long>, delta: Long): Map<Long, List<Long>> {
-    tailrec fun findConnections(adapters: List<Long>, acc: Map<Long, List<Long>>): Map<Long, List<Long>> =
+fun findBackLinks(input: List<Int>, maxDelta: Int): Map<Int, List<Int>> {
+    tailrec fun findBackLinks(adapters: List<Int>, acc: Map<Int, List<Int>>): Map<Int, List<Int>> =
         if (adapters.size == 1) {
             acc
         } else {
             val head = adapters.first()
             val rest = adapters.drop(1)
-            findConnections(rest, acc + Pair(head, rest.takeWhile { head - it <= delta }))
+            findBackLinks(rest, acc + Pair(head, rest.takeWhile { head - it <= maxDelta }))
         }
-    return findConnections(input.sortedDescending(), emptyMap())
+    return findBackLinks(input.sortedDescending(), emptyMap())
 }
 
+/**
+ * Example:
+ *  6-7-8-9-10
+ * X-1-1-1-1-X
+ *
+ * Define paths-to-6 = 1, start at 7.
+ *
+ *     paths-to-7  =  6-7: paths-to-6 (1) [1]
+ *
+ *     paths-to-8  =  7-8: paths-to-7 (1) [2]
+ *                 +  6-8: paths-to-6 (1)
+ *
+ *     paths-to-9  =  8-9: paths-to-8 (2) [4]
+ *                 +  7-9: paths-to-7 (1)
+ *                 +  6-9: paths-to-6 (1)
+ *
+ *     paths-to-10 = 9-10: paths-to-9 (4) [7]
+ *                 + 8-10: paths-to-8 (2)
+ *                 + 7-10: paths-to-7 (1)
+ */
 fun countValidSequences(
-    input: List<Long>,
-    delta: Long = 3,
-    target: Long = input.minOrNull()!!,
-    start: Long = input.maxOrNull()!!
+    input: List<Int>,
+    maxDelta: Int = 3,
 ): Long {
-    val connections = findConnections(input, delta).also { println("connections = $it") }
+    val ordered = input.sorted()
+    val backLinks = findBackLinks(input, maxDelta)
 
-    fun countPathsBack(current: Long, acc: Long): Long =
-        if (current == target) {
-            acc
-        } else {
-            connections[current]!!.sumOf { countPathsBack(it, 1) }
-        }
-    return countPathsBack(start, 1)
+    return ordered.drop(1).fold(mapOf(0 to 1L)) { acc, value ->
+        acc + Pair(value, backLinks.getValue(value).sumOf { acc.getValue(it) })
+    }.getValue(ordered.last())
 }
