@@ -28,10 +28,10 @@ fun findBackLinks(input: List<Int>, maxDelta: Int): Map<Int, List<Int>> {
 
 /**
  * Example:
- *  6-7-8-9-10
- * X-1-1-1-1-X
+ *  Sequence: 6-7-8-9-10
+ *  Deltas:    1-1-1-1
  *
- * Define paths-to-6 = 1, start at 7.
+ * Let paths-to-6 = 1, start at 7.
  *
  *     paths-to-7  =  6-7: paths-to-6 (1) [1]
  *
