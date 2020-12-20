@@ -1,5 +1,9 @@
 package day11
 
+import day11.part1.nextGrid
+import day11.part1.stabliiseGrid
+import day11.part2.*
+
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -107,7 +111,7 @@ class Day11Test {
         """
         )
 
-        assertEquals(37, countOccupiedSeats(stabliiseGrid(grid)!!))
+        assertEquals(37, day11.part1.countOccupiedSeats(stabliiseGrid(grid)!!))
     }
 
     @Test

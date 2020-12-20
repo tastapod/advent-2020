@@ -1,7 +1,11 @@
 package day11
 
 import common.file
-import java.lang.Integer.parseInt
+import day11.part1.stabliiseGrid
+import day11.part2.buildSeatMap
+import day11.part2.countOccupiedSeats
+import day11.part2.findSeats
+import day11.part2.stabliiseSeatMap
 
 fun main() {
     println("Day 11")
@@ -11,12 +15,9 @@ fun main() {
 
 val input by lazy { grid(file("day11/input.txt").readText()) }
 
-fun part1() = countOccupiedSeats(stabliiseGrid(input)!!)
+fun part1() = day11.part1.countOccupiedSeats(stabliiseGrid(input)!!)
 
-fun part2() = countOccupiedSeats(
-    stabliiseSeatMap(
-        buildSeatMap(
-            findSeats(input), input.size, input[0].size
-        )
-    )!!
-)
+fun part2(): Int {
+    val seatMap = buildSeatMap(findSeats(input), input.size, input[0].size)
+    return countOccupiedSeats(stabliiseSeatMap(seatMap)!!)
+}
