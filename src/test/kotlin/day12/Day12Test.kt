@@ -1,5 +1,6 @@
 package day12
 
+import day12.part1.Ship
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
