@@ -10,7 +10,7 @@ fun main() {
 
 val input by lazy { file("day12/input.txt").readLines() }
 
-fun part1() = Ship(Direction.EAST, Position(0, 0)).navigate(input).manhattenDistance()
+private fun part1() = Ship(Direction.EAST, Position(0, 0)).navigate(input).manhattenDistance()
 
-fun part2() = ShipWithWaypoint(Direction.EAST, Position(0, 0), Position(10, 1))
+private fun part2() = ShipWithWaypoint(Direction.EAST, Position(0, 0), Position(10, 1))
     .navigate(input).manhattenDistance()
