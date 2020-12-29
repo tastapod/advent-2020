@@ -1,7 +1,6 @@
 package day14
 
 import java.lang.Long.parseLong
-import java.util.HashMap
 
 typealias MaskingFunction = (Long) -> Long
 
@@ -13,7 +12,7 @@ interface Emulator {
 
 class MaskingEmulator(
     private val applyMask: MaskingFunction = { it },
-    private val memory: MutableMap<Long, Long> = HashMap()
+    private val memory: Map<Long, Long> = emptyMap()
 ) : Emulator {
     override val totalValues
         get() = memory.values.sum()
@@ -21,14 +20,13 @@ class MaskingEmulator(
     override fun updateMask(mask: String) =
         MaskingEmulator(maskingFunction(mask), memory)
 
-    override fun setValue(address: Long, value: Long) = apply {
-        memory[address] = applyMask(value)
-    }
+    override fun setValue(address: Long, value: Long) =
+        MaskingEmulator(applyMask, memory + Pair(address, applyMask(value)))
 }
 
 class FloatingEmulator(
     private val masks: Set<MaskingFunction> = emptySet(),
-    private val memory: MutableMap<Long, Long> = HashMap()
+    private val memory: Map<Long, Long> = emptyMap()
 ) : Emulator {
     override val totalValues
         get() = memory.values.sum()
@@ -36,9 +34,8 @@ class FloatingEmulator(
     override fun updateMask(mask: String) =
         FloatingEmulator(unrollFloatingMask(mask).map(::maskingFunction).toSet(), memory)
 
-    override fun setValue(address: Long, value: Long) = apply {
-        masks.forEach { applyMask -> memory[applyMask(address)] = value }
-    }
+    override fun setValue(address: Long, value: Long) =
+        FloatingEmulator(masks, memory + masks.map { applyMask -> Pair(applyMask(address), value) })
 }
 
 fun maskingFunction(mask: String): MaskingFunction {

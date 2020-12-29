@@ -11,4 +11,5 @@ fun main() {
 val input by lazy { file("day14/input.txt").readText().trim() }
 
 fun part1() = runProgram(input, MaskingEmulator()).totalValues
+
 fun part2() = runProgram(input, FloatingEmulator()).totalValues
