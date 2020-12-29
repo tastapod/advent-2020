@@ -1,13 +1,11 @@
 package day13
 
 import common.file
-import java.lang.Math.multiplyExact
 
 fun main() {
     println("Day 13")
     println("Part 1: ${part1()}")
-    println("Product = ${parseInput(input).second.map(Int::toLong).reduce(::multiplyExact)}")
-    println("Part 2: ${part2()}")
+//    println("Part 2: ${part2()}")
 }
 
 val input by lazy { file("day13/input.txt").readText() }
