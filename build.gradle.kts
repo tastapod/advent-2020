@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.7.10"
     application
 }
 
-group = "me.daniel"
+group = "net.dannorth"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -13,9 +13,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test-junit5"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
+    testImplementation(kotlin("test"))
 }
 
 tasks.test {
@@ -27,5 +25,5 @@ tasks.withType<KotlinCompile>() {
 }
 
 application {
-    mainClassName = "MainKt"
+    mainClass.set("MainKt")
 }
